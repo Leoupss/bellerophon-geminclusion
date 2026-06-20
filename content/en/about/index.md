@@ -1,11 +1,11 @@
 ---
 title: "About"
-description: "About the Bellerophon GemInclusion reference base"
+description: "About the Bellerophon Includia reference base"
 ---
 
 ## The approach
 
-**Bellerophon GemInclusion** is a personal reference base dedicated to the photomicrography of inclusions in gemstones.
+**Bellerophon Includia** is a personal reference base dedicated to the photomicrography of inclusions in gemstones.
 
 Each card is built from direct observations through a gemological microscope, with identification rigour inspired by major laboratory methods (GIA, Gübelin, SSEF).
 
@@ -23,4 +23,4 @@ Cards systematically document:
 
 ## Rights
 
-All photomicrographs are the exclusive property of **Bellerophon GemInclusion**. Reproduction prohibited without written permission.
+All photomicrographs are the exclusive property of **Bellerophon Includia**. Reproduction prohibited without written permission.

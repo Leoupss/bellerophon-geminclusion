@@ -1,5 +1,5 @@
 ---
-title: "Bellerophon GemInclusion"
+title: "Bellerophon Includia"
 description: "Base de référence en inclusions gemmologiques — photomicrographie haute résolution"
 ---
 

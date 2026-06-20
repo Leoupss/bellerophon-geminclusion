@@ -1,11 +1,11 @@
 ---
 title: "À propos"
-description: "Présentation de la base de référence Bellerophon GemInclusion"
+description: "Présentation de la base de référence Bellerophon Includia"
 ---
 
 ## La démarche
 
-**Bellerophon GemInclusion** est une base de référence personnelle dédiée à la photomicrographie des inclusions dans les pierres précieuses.
+**Bellerophon Includia** est une base de référence personnelle dédiée à la photomicrographie des inclusions dans les pierres précieuses.
 
 Chaque fiche est construite à partir d'observations directes au microscope gemmologique, avec une rigueur d'identification inspirée des méthodes des grands laboratoires (GIA, Gübelin, SSEF).
 
@@ -23,4 +23,4 @@ Les fiches documentent systématiquement :
 
 ## Droits
 
-Toutes les photomicrographies sont la propriété exclusive de **Bellerophon GemInclusion**. Reproduction interdite sans autorisation écrite.
+Toutes les photomicrographies sont la propriété exclusive de **Bellerophon Includia**. Reproduction interdite sans autorisation écrite.
