@@ -383,12 +383,12 @@ a:hover { color: var(--accent); }
 .card-photo-copyright {
   position: absolute;
   bottom: 8px;
-  right: 10px;
-  font-size: 0.55rem;
-  letter-spacing: 0.08em;
-  color: rgba(0,0,0,0.4);
+  right: 8px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.85);
   font-weight: var(--weight-thin);
-  text-shadow: 0 1px 3px rgba(255,255,255,0.6);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7), 0 0 8px rgba(0,0,0,0.4);
   pointer-events: none;
   user-select: none;
 }
