@@ -1,4 +1,4 @@
-/* Bellerophon GemInclusion — main.js */
+/* Bellerophon Includia — main.js */
 
 /* ---- Mobile nav ---- */
 (function () {
