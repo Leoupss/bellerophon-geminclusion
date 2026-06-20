@@ -480,7 +480,7 @@ a:hover { color: var(--accent); }
 .single-photo-copyright {
   position: absolute;
   bottom: 9px;
-  right: 11px;
+  left: 11px;
   font-size: 0.55rem;
   letter-spacing: 0.08em;
   color: rgba(0,0,0,0.4);
