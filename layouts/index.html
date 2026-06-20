@@ -5,7 +5,7 @@
     <h1 class="hero-title">{{ .Site.Params.subtitle }}</h1>
     <div class="hero-rule"></div>
     <p class="hero-tagline">{{ .Site.Params.heroTagline }}</p>
-    <a href="{{ "/inclusions/" | relLangURL }}" class="hero-cta">{{ .Site.Params.exploreCTA }}</a>
+    <a href="{{ "/inclusions/" | relURL }}" class="hero-cta">{{ .Site.Params.exploreCTA }}</a>
   </div>
 </section>
 
@@ -15,18 +15,17 @@
 </section>
 {{ end }}
 
-{{ $inclusions := where (where .Site.RegularPages "Section" "inclusions") ".Lang" .Lang }}
-{{ $featured := where $inclusions ".Params.featured" true }}
+{{ $featured := where .Site.RegularPages ".Params.featured" true }}
 {{ if $featured }}
 <section class="home-featured container">
-  <h2 class="section-title">{{ if eq .Lang "fr" }}Sélection de la base{{ else }}Featured inclusions{{ end }}</h2>
+  <h2 class="section-title">Sélection de la base</h2>
   <div class="inclusion-grid">
     {{ range first 6 $featured }}
       {{ partial "inclusion-card.html" . }}
     {{ end }}
   </div>
   <div class="home-featured-cta">
-    <a href="{{ "/inclusions/" | relLangURL }}" class="btn-outline">{{ $.Site.Params.exploreCTA }}</a>
+    <a href="{{ "/inclusions/" | relURL }}">{{ $.Site.Params.exploreCTA }}</a>
   </div>
 </section>
 {{ end }}
