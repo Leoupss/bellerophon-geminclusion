@@ -468,6 +468,7 @@ a:hover { color: var(--accent); }
   display: inline-block;
   max-width: 100%;
   margin-bottom: 2.5rem;
+  overflow: hidden;
 }
 .single-photo {
   max-width: 100%;
