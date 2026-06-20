@@ -1,0 +1,31 @@
+<nav class="site-nav" role="navigation" aria-label="Navigation principale">
+  <div class="nav-inner">
+    <a href="{{ "/" | relLangURL }}" class="nav-logo" aria-label="{{ .Site.Title }}">
+      <span class="nav-logo-main">Bellerophon</span>
+      <span class="nav-logo-sub">GemInclusion</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-menu" role="list">
+      <li><a href="{{ "/inclusions/" | relLangURL }}" {{ if (hasPrefix .RelPermalink (printf "/%s/inclusions" .Lang)) }}class="active"{{ end }}>{{ .Site.Params.includesLabel }}</a></li>
+      {{ if eq .Lang "fr" }}
+      <li><a href="{{ "/glossaire/" | relLangURL }}" {{ if (hasPrefix .RelPermalink (printf "/%s/glossaire" .Lang)) }}class="active"{{ end }}>{{ .Site.Params.glossaryLabel }}</a></li>
+      <li><a href="{{ "/a-propos/" | relLangURL }}" {{ if (hasPrefix .RelPermalink (printf "/%s/a-propos" .Lang)) }}class="active"{{ end }}>{{ .Site.Params.aboutLabel }}</a></li>
+      {{ else }}
+      <li><a href="{{ "/glossary/" | relLangURL }}" {{ if (hasPrefix .RelPermalink (printf "/%s/glossary" .Lang)) }}class="active"{{ end }}>{{ .Site.Params.glossaryLabel }}</a></li>
+      <li><a href="{{ "/about/" | relLangURL }}" {{ if (hasPrefix .RelPermalink (printf "/%s/about" .Lang)) }}class="active"{{ end }}>{{ .Site.Params.aboutLabel }}</a></li>
+      {{ end }}
+      <li class="lang-switcher">
+        {{ range .Translations }}
+        <a href="{{ .Permalink }}" class="lang-link" lang="{{ .Lang }}">{{ .Lang | upper }}</a>
+        {{ end }}
+        {{ if not .IsTranslated }}
+          {{ $otherLang := cond (eq .Lang "fr") "en" "fr" }}
+          {{ $otherHome := cond (eq .Lang "fr") "/en/" "/fr/" }}
+          <a href="{{ $otherHome | absURL }}" class="lang-link" lang="{{ $otherLang }}">{{ $otherLang | upper }}</a>
+        {{ end }}
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,72 @@
+baseURL = "/"
+title = "Bellerophon GemInclusion"
+defaultContentLanguage = "fr"
+defaultContentLanguageInSubdir = true
+enableRobotsTXT = true
+summaryLength = 50
+
+[languages]
+  [languages.fr]
+    label = "Français"
+    weight = 1
+    contentDir = "content/fr"
+    title = "Bellerophon GemInclusion"
+    [languages.fr.params]
+      subtitle = "Base de référence en inclusions gemmologiques"
+      includesLabel = "Base d'inclusions"
+      glossaryLabel = "Glossaire"
+      aboutLabel = "À propos"
+      filterHost = "Pierre hôte"
+      filterOrigin = "Origine"
+      filterTreatment = "Traitement"
+      filterAll = "Tous"
+      noResults = "Aucune inclusion ne correspond aux filtres sélectionnés."
+      clickEnlarge = "Cliquer pour agrandir"
+      hostLabel = "Pierre hôte"
+      varietyLabel = "Variété"
+      inclusionLabel = "Type d'inclusion"
+      originLabel = "Origine géographique"
+      treatmentLabel = "Traitement"
+      depositLabel = "Type de gisement"
+      magnLabel = "Grossissement"
+      diagLabel = "Intérêt diagnostique"
+      backLabel = "← Retour aux inclusions"
+      heroTagline = "La photomicrographie gemmologique au service de l'identification"
+      exploreCTA = "Explorer la base"
+
+  [languages.en]
+    label = "English"
+    weight = 2
+    contentDir = "content/en"
+    title = "Bellerophon GemInclusion"
+    [languages.en.params]
+      subtitle = "Reference base in gemological inclusions"
+      includesLabel = "Inclusion Base"
+      glossaryLabel = "Glossary"
+      aboutLabel = "About"
+      filterHost = "Host gem"
+      filterOrigin = "Origin"
+      filterTreatment = "Treatment"
+      filterAll = "All"
+      noResults = "No inclusions match the selected filters."
+      clickEnlarge = "Click to enlarge"
+      hostLabel = "Host gem"
+      varietyLabel = "Variety"
+      inclusionLabel = "Inclusion type"
+      originLabel = "Geographic origin"
+      treatmentLabel = "Treatment"
+      depositLabel = "Deposit type"
+      magnLabel = "Magnification"
+      diagLabel = "Diagnostic value"
+      backLabel = "← Back to inclusions"
+      heroTagline = "Gemological photomicrography for accurate identification"
+      exploreCTA = "Explore the base"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[imaging]
+  quality = 80
+  resampleFilter = "Lanczos"

@@ -1,0 +1,80 @@
+{{ define "main" }}
+<article class="inclusion-single container">
+  <a href="{{ "/inclusions/" | relLangURL }}" class="back-link">{{ .Site.Params.backLabel }}</a>
+
+  <header class="single-header">
+    <h1 class="single-title">{{ .Title }}</h1>
+    <div class="single-rule"></div>
+  </header>
+
+  {{ $photo := .Resources.GetMatch "photo.*" }}
+  {{ if $photo }}
+  {{ $medium := $photo.Process "resize 1200x webp q100" }}
+  <div class="single-photo-wrap">
+    <img
+      src="{{ $medium.RelPermalink }}"
+      alt="{{ .Title }}"
+      class="single-photo lightbox-trigger"
+      data-full="{{ $photo.RelPermalink }}"
+      data-caption="{{ .Title }}"
+      title="{{ .Site.Params.clickEnlarge }}"
+      width="{{ $medium.Width }}"
+      height="{{ $medium.Height }}"
+      loading="eager">
+    <span class="single-photo-copyright" aria-hidden="true">© Bellerophon GemInclusion</span>
+    <button class="lightbox-hint" aria-label="{{ .Site.Params.clickEnlarge }}">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+    </button>
+  </div>
+  {{ end }}
+
+  <div class="single-body">
+    <dl class="meta-table">
+      <div class="meta-row">
+        <dt>{{ .Site.Params.hostLabel }}</dt>
+        <dd>{{ .Params.pierre_hote }}</dd>
+      </div>
+      {{ with .Params.variete }}
+      <div class="meta-row">
+        <dt>{{ $.Site.Params.varietyLabel }}</dt>
+        <dd>{{ . }}</dd>
+      </div>
+      {{ end }}
+      <div class="meta-row">
+        <dt>{{ .Site.Params.inclusionLabel }}</dt>
+        <dd>{{ .Params.type_inclusion }}</dd>
+      </div>
+      <div class="meta-row">
+        <dt>{{ .Site.Params.originLabel }}</dt>
+        <dd>{{ .Params.origine }}</dd>
+      </div>
+      <div class="meta-row">
+        <dt>{{ .Site.Params.treatmentLabel }}</dt>
+        <dd>{{ .Params.traitement }}</dd>
+      </div>
+      {{ with .Params.type_gisement }}
+      <div class="meta-row">
+        <dt>{{ $.Site.Params.depositLabel }}</dt>
+        <dd>{{ . }}</dd>
+      </div>
+      {{ end }}
+      {{ with .Params.grossissement }}
+      <div class="meta-row">
+        <dt>{{ $.Site.Params.magnLabel }}</dt>
+        <dd>{{ . }}</dd>
+      </div>
+      {{ end }}
+      {{ with .Params.interet_diagnostique }}
+      <div class="meta-row meta-row--full">
+        <dt>{{ $.Site.Params.diagLabel }}</dt>
+        <dd>{{ . }}</dd>
+      </div>
+      {{ end }}
+    </dl>
+
+    {{ with .Content }}
+    <div class="prose single-prose">{{ . }}</div>
+    {{ end }}
+  </div>
+</article>
+{{ end }}
