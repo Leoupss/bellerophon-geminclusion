@@ -24,8 +24,8 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 PHOTO_DIR    = Path(r"C:\Users\movix\Desktop\Photo\photo Theo test")
 REPO_DIR     = Path(r"C:\Users\movix\Documents\bellerophon-geminclusion")
 # True  → creates content/fr/inclusions/[slug]  AND  content/en/inclusions/[slug]
-# False → creates content/inclusions/[slug]  (current monolingual structure)
-MULTILINGUAL = True
+# False → creates content/inclusions/[slug]  (monolingual English structure)
+MULTILINGUAL = False
 TODAY        = date.today().isoformat()
 PHOTO_EXTS   = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp"}
 

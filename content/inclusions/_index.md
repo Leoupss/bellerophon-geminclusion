@@ -1,4 +1,4 @@
 ---
-title: "Base d'inclusions"
-description: "Catalogue complet des inclusions gemmologiques documentées — filtrable par pierre hôte, origine et traitement"
+title: "Inclusion database"
+description: "Complete catalogue of documented gemological inclusions — filterable by host stone, origin and treatment"
 ---

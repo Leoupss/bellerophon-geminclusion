@@ -18,7 +18,7 @@
 {{ $featured := where .Site.RegularPages ".Params.featured" true }}
 {{ if $featured }}
 <section class="home-featured container">
-  <h2 class="section-title">Sélection de la base</h2>
+  <h2 class="section-title">Featured inclusions</h2>
   <div class="inclusion-grid">
     {{ range first 6 $featured }}
       {{ partial "inclusion-card.html" . }}

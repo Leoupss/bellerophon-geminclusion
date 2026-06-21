@@ -5,7 +5,7 @@
     {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
   </header>
 
-  <div class="filters-bar container" id="filters" aria-label="Filtres">
+  <div class="filters-bar container" id="filters" aria-label="Filters">
     <select class="filter-select" id="filter-host" aria-label="{{ .Site.Params.filterHost }}">
       <option value="">{{ .Site.Params.filterHost }} — {{ .Site.Params.filterAll }}</option>
     </select>
@@ -15,8 +15,8 @@
     <select class="filter-select" id="filter-treatment" aria-label="{{ .Site.Params.filterTreatment }}">
       <option value="">{{ .Site.Params.filterTreatment }} — {{ .Site.Params.filterAll }}</option>
     </select>
-    <button class="filter-reset" id="filter-reset" aria-label="Réinitialiser les filtres">
-      Réinitialiser
+    <button class="filter-reset" id="filter-reset" aria-label="Reset filters">
+      Reset
     </button>
   </div>
 
