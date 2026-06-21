@@ -102,22 +102,6 @@ TREATMENTS = {
     "heat":            "Heated",
 }
 
-# Diagnostic notes for known (host_key, inclusion_key) pairs
-DIAGNOSTICS: dict[tuple, str] = {
-    ("sapphire", "silk"):        "Intact rutile silk dissolves above 1,200 °C — a key indicator of no heat treatment.",
-    ("ruby",     "silk"):        "Fine, regular silk confirms the absence of heat treatment in this ruby.",
-    ("sapphire", "rutile"):      "Oriented rutile crystals attest to slow crystallisation in a metamorphic or magmatic environment.",
-    ("sapphire", "fingerprint"): "Fingerprints are partially healed fractures, typical of natural, unheated corundum.",
-    ("ruby",     "fingerprint"): "Fingerprints indicate a fracture healing during crystal growth.",
-    ("sapphire", "apatite"):     "Apatite indicates a calc-silicate metamorphic environment, common in Madagascar and Sri Lanka sapphires.",
-    ("ruby",     "apatite"):     "Apatite associated with ruby is often characteristic of a marble-hosted deposit.",
-    ("spinel",   "apatite"):     "Apatite in spinel is typical of high-pressure metamorphic deposits (Tajikistan, Myanmar).",
-    ("spinel",   "calcite"):     "Calcite confirms a carbonate metamorphic formation environment, common in Tajikistan spinels.",
-    ("sapphire", "calcite"):     "Calcite confirms a calc-silicate metamorphic context, typical of Madagascar sapphires.",
-    ("emerald",  "three-phase"): "Three-phase inclusions (solid + liquid + gas) are a distinctive marker of Colombian emeralds.",
-    ("emerald",  "two-phase"):   "Two-phase inclusions are common in hydrothermally-formed emeralds.",
-}
-DIAG_DEFAULT = "Document the diagnostic interest of this inclusion."
 
 # ── HELPERS ────────────────────────────────────────────────────────────────────
 
@@ -208,19 +192,14 @@ def parse_filename(path: Path) -> dict:
     inclusion_raw = re.sub(r"\s+", " ", text).strip()
     inclusion = inclusion_raw.title() if inclusion_raw else ""
 
-    # 6. Diagnostic note
-    diag_key = (host_key or "", inclusion_raw)
-    diagnostic = DIAGNOSTICS.get(diag_key, DIAG_DEFAULT)
-
     return {
-        "host":        host_val  or "Unidentified",
-        "host_key":    host_key  or "",
-        "origin":      origin_val or "Not identified",
-        "treatment":   treat_val  or "None detected",
-        "inclusion":   inclusion,
+        "host":          host_val  or "Unidentified",
+        "host_key":      host_key  or "",
+        "origin":        origin_val or "Not identified",
+        "treatment":     treat_val  or "None detected",
+        "inclusion":     inclusion,
         "inclusion_raw": inclusion_raw,
         "magnification": magnification,
-        "diagnostic":  diagnostic,
     }
 
 
@@ -255,7 +234,6 @@ def build_frontmatter(data: dict, title: str) -> str:
     ]
     if data["magnification"]:
         lines.append(f'grossissement: "{data["magnification"]}"')
-    lines.append(f'interet_diagnostique: "{data["diagnostic"]}"')
     lines.append("---")
     return "\n".join(lines) + "\n"
 
