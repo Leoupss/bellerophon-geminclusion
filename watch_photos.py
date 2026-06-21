@@ -2,8 +2,9 @@
 """
 watch_photos.py — Surveille "Deposer Photo/" et génère les fiches inclusions Hugo.
 
-Format attendu : [Pierre]_[Origine]_-_[Inclusion]_[Grossissement]__(N).ext
-Exemple        : Ruby_Mozambique_-_rosette_x50__(2).jpg
+Formats acceptés (espaces ou underscores) :
+  Ruby Mozambique - rosette x50 (2).jpg
+  Ruby_Mozambique_-_rosette_x50_(2).jpg
 """
 
 import re
@@ -25,26 +26,30 @@ TREATMENTS = {"heated", "unheated", "filled", "beryllium"}
 
 
 def parse_filename(stem: str) -> dict | None:
-    # Supprimer le suffixe optionnel __(N)
-    stem = re.sub(r"__\(\d+\)$", "", stem)
+    # 1. Supprimer le numéro final : " (2)", "_(2)", "(2)"
+    folder_name = re.sub(r"[\s_]*\(\d+\)\s*$", "", stem).strip()
 
-    if "_-_" not in stem:
+    # 2. Normaliser pour le parsing : underscores → espaces, "_-_" → " - "
+    normalized = folder_name.replace("_-_", " - ").replace("_", " ")
+
+    # 3. Séparer sur " - "
+    if " - " not in normalized:
         return None
+    left, right = normalized.split(" - ", 1)
+    left  = left.strip()
+    right = right.strip()
 
-    left, right = stem.split("_-_", 1)
-
-    # Côté gauche : dernier segment = Origine, le reste = Pierre
-    parts   = left.split("_")
-    pierre  = " ".join(parts[:-1]) if len(parts) > 1 else left
+    # 4. Partie gauche : dernier mot = origine, le reste = pierre
+    parts   = left.split()
+    pierre  = " ".join(parts[:-1]) if len(parts) > 1 else parts[0]
     origine = parts[-1]
 
-    # Côté droit : extraire grossissement, traitement, inclusion
-    right_parts     = right.split("_")
+    # 5. Partie droite : grossissement (x+chiffres), traitement, inclusion
     grossissement   = ""
     treatments      = []
     inclusion_parts = []
 
-    for p in right_parts:
+    for p in right.split():
         if re.fullmatch(r"x\d+", p, re.IGNORECASE):
             grossissement = "x" + re.fullmatch(r"x(\d+)", p, re.IGNORECASE).group(1)
         elif p.lower() in TREATMENTS:
@@ -56,7 +61,7 @@ def parse_filename(stem: str) -> dict | None:
     traitement = ", ".join(treatments) if treatments else "None detected"
 
     return {
-        "folder_name":    stem,
+        "folder_name":    folder_name,
         "title":          f"{inclusion} in {pierre} — {origine}",
         "pierre_hote":    pierre,
         "type_inclusion": inclusion,
