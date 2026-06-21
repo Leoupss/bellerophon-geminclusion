@@ -87,7 +87,6 @@ type_inclusion: "Fingerprint"
 origine: "Madagascar"
 traitement: "Unheated"
 grossissement: "×150"
-interet_diagnostique: "Fingerprints are partially healed fractures, typical of natural, unheated corundum."
 ---
 ```
 

@@ -385,19 +385,17 @@ def build_title(data: dict, lang: str) -> str:
 def build_frontmatter(data: dict, title: str, lang: str) -> str:
     if lang == "fr":
         fields = {
-            "pierre_hote":         data["host_fr"],
-            "type_inclusion":      data["inclusion_fr"],
-            "origine":             data["origin_fr"],
-            "traitement":          data["treat_fr"],
-            "interet_diagnostique": data["diag_fr"],
+            "pierre_hote":    data["host_fr"],
+            "type_inclusion": data["inclusion_fr"],
+            "origine":        data["origin_fr"],
+            "traitement":     data["treat_fr"],
         }
     else:
         fields = {
-            "pierre_hote":         data["host_en"],
-            "type_inclusion":      data["inclusion_en"],
-            "origine":             data["origin_en"],
-            "traitement":          data["treat_en"],
-            "interet_diagnostique": data["diag_en"],
+            "pierre_hote":    data["host_en"],
+            "type_inclusion": data["inclusion_en"],
+            "origine":        data["origin_en"],
+            "traitement":     data["treat_en"],
         }
 
     lines = [
@@ -407,10 +405,9 @@ def build_frontmatter(data: dict, title: str, lang: str) -> str:
         "draft: false",
     ]
     for key, val in fields.items():
-        if key == "interet_diagnostique":
-            if data["magnification"]:
-                lines.append(f'grossissement: "{data["magnification"]}"')
         lines.append(f'{key}: "{val}"')
+    if data["magnification"]:
+        lines.append(f'grossissement: "{data["magnification"]}"')
     lines.append("---")
     return "\n".join(lines) + "\n"
 

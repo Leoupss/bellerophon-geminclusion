@@ -84,6 +84,22 @@ ORIGINS = {
     "mada":        "Madagascar",
 }
 
+# Colored spinel varieties: color token → display label
+# When color + "spinel" both appear in the filename, it's a host variety, not an inclusion.
+SPINEL_VARIETIES = {
+    "cobalt": "Spinel — Cobalt Spinel",
+    "blue":   "Spinel — Blue Spinel",
+    "red":    "Spinel — Red Spinel",
+    "pink":   "Spinel — Pink Spinel",
+    "violet": "Spinel — Violet Spinel",
+    "purple": "Spinel — Purple Spinel",
+    "mauve":  "Spinel — Mauve Spinel",
+    "grey":   "Spinel — Grey Spinel",
+    "gray":   "Spinel — Grey Spinel",
+    "black":  "Spinel — Black Spinel",
+    "white":  "Spinel — White Spinel",
+}
+
 # Multi-word treatments matched before single-word ones
 TREATMENTS = {
     "fracture filled": "Fracture Filled",
@@ -173,15 +189,20 @@ def parse_filename(path: Path) -> dict:
     work = re.sub(r"\s+", " ", work).strip()
     text = work.lower()
 
-    # 2. Host stone — cobalt spinel takes priority over generic matching
-    cobalt_spinel = (
-        bool(re.search(r"(?<![a-z])cobalt(?![a-z])", text)) and
-        bool(re.search(r"(?<![a-z])spinel(?![a-z])", text))
-    )
-    if cobalt_spinel:
-        host_key = "cobalt spinel"
-        host_val = "Spinel — Cobalt Spinel"
-        text = remove_token(text, "cobalt")
+    # 2. Host stone
+    #    Colored spinel varieties (cobalt, blue, red, pink…) take priority:
+    #    when color + "spinel" both appear, it's a host variety, not an inclusion.
+    spinel_variety_key = None
+    if re.search(r"(?<![a-z])spinel(?![a-z])", text):
+        for color in SPINEL_VARIETIES:
+            if re.search(r"(?<![a-z])" + re.escape(color) + r"(?![a-z])", text):
+                spinel_variety_key = color
+                break
+
+    if spinel_variety_key:
+        host_key = f"{spinel_variety_key} spinel"
+        host_val = SPINEL_VARIETIES[spinel_variety_key]
+        text = remove_token(text, spinel_variety_key)
         text = remove_token(text, "spinel")
     else:
         host_key, host_val = find_match(text, HOST_STONES)
@@ -199,8 +220,8 @@ def parse_filename(path: Path) -> dict:
         text = remove_token(text, treat_key)
 
     # 5. Remaining text = inclusion type
-    #    For cobalt spinel the variety IS the host — no inclusion to extract.
-    if cobalt_spinel:
+    #    For colored spinel varieties, the variety IS the host — no inclusion.
+    if spinel_variety_key:
         inclusion     = "Not specified"
         inclusion_raw = ""
     else:
@@ -232,7 +253,7 @@ def build_title(data: dict) -> str:
             if treat and treat not in neutral:
                 title += f" ({treat.lower()})"
     else:
-        # No distinct inclusion (e.g. cobalt spinel): lead with the host stone.
+        # No distinct inclusion (colored spinel variety etc.): lead with host.
         title = host if host not in ("", "Unidentified") else (inc or "Inclusion")
 
     if origin not in ("", "Not identified"):

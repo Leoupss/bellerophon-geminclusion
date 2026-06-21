@@ -9,7 +9,6 @@ origine: ""
 traitement: "Aucun"
 type_gisement: ""
 grossissement: ""
-interet_diagnostique: ""
 featured: false
 ---
 
