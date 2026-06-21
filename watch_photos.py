@@ -173,10 +173,20 @@ def parse_filename(path: Path) -> dict:
     work = re.sub(r"\s+", " ", work).strip()
     text = work.lower()
 
-    # 2. Host stone
-    host_key, host_val = find_match(text, HOST_STONES)
-    if host_key:
-        text = remove_token(text, host_key)
+    # 2. Host stone — cobalt spinel takes priority over generic matching
+    cobalt_spinel = (
+        bool(re.search(r"(?<![a-z])cobalt(?![a-z])", text)) and
+        bool(re.search(r"(?<![a-z])spinel(?![a-z])", text))
+    )
+    if cobalt_spinel:
+        host_key = "cobalt spinel"
+        host_val = "Spinel — Cobalt Spinel"
+        text = remove_token(text, "cobalt")
+        text = remove_token(text, "spinel")
+    else:
+        host_key, host_val = find_match(text, HOST_STONES)
+        if host_key:
+            text = remove_token(text, host_key)
 
     # 3. Origin
     origin_key, origin_val = find_match(text, ORIGINS)
@@ -189,8 +199,13 @@ def parse_filename(path: Path) -> dict:
         text = remove_token(text, treat_key)
 
     # 5. Remaining text = inclusion type
-    inclusion_raw = re.sub(r"\s+", " ", text).strip()
-    inclusion = inclusion_raw.title() if inclusion_raw else ""
+    #    For cobalt spinel the variety IS the host — no inclusion to extract.
+    if cobalt_spinel:
+        inclusion     = "Not specified"
+        inclusion_raw = ""
+    else:
+        inclusion_raw = re.sub(r"\s+", " ", text).strip()
+        inclusion     = inclusion_raw.title() if inclusion_raw else ""
 
     return {
         "host":          host_val  or "Unidentified",
@@ -204,17 +219,22 @@ def parse_filename(path: Path) -> dict:
 
 
 def build_title(data: dict) -> str:
-    inc    = data["inclusion"] or "Inclusion"
+    inc    = data["inclusion"]
     host   = data["host"]
     origin = data["origin"]
     treat  = data["treatment"]
 
-    title = inc
-    if host not in ("", "Unidentified"):
-        neutral = {"None detected", "Unheated", "No Treatment"}
-        title += f" in {host}"
-        if treat and treat not in neutral:
-            title += f" ({treat.lower()})"
+    if inc and inc != "Not specified":
+        title = inc
+        if host not in ("", "Unidentified"):
+            neutral = {"None detected", "Unheated", "No Treatment"}
+            title += f" in {host}"
+            if treat and treat not in neutral:
+                title += f" ({treat.lower()})"
+    else:
+        # No distinct inclusion (e.g. cobalt spinel): lead with the host stone.
+        title = host if host not in ("", "Unidentified") else (inc or "Inclusion")
+
     if origin not in ("", "Not identified"):
         title += f" — {origin}"
     return title
