@@ -4,7 +4,11 @@
   data-treatment="{{ .Params.traitement | lower }}">
   <a href="{{ .RelPermalink }}" class="card-link" aria-label="{{ .Title }}">
     <div class="card-photo-wrap">
-      {{ $photo := .Resources.GetMatch "photo.*" }}
+      {{- $photo := .Resources.GetMatch "photo.jpg" -}}
+      {{- if not $photo }}{{- $photo = .Resources.GetMatch "photo.jpeg" -}}{{ end -}}
+      {{- if not $photo }}{{- $photo = .Resources.GetMatch "photo.png" -}}{{ end -}}
+      {{- if not $photo }}{{- $photo = (.Resources.ByType "image").First -}}{{ end -}}
+      <!-- debug: page="{{ .File.Path }}" resources={{ len .Resources }} photo={{ if $photo }}{{ $photo.Name }}{{ else }}nil{{ end }} -->
       {{ if $photo }}
         {{ $thumb := $photo.Process "resize 1000x webp q80" }}
         <img

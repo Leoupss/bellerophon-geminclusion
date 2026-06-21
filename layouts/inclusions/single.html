@@ -7,7 +7,11 @@
     <div class="single-rule"></div>
   </header>
 
-  {{ $photo := .Resources.GetMatch "photo.*" }}
+  {{- $photo := .Resources.GetMatch "photo.jpg" -}}
+  {{- if not $photo }}{{- $photo = .Resources.GetMatch "photo.jpeg" -}}{{ end -}}
+  {{- if not $photo }}{{- $photo = .Resources.GetMatch "photo.png" -}}{{ end -}}
+  {{- if not $photo }}{{- $photo = (.Resources.ByType "image").First -}}{{ end -}}
+  <!-- debug: resources={{ len .Resources }} photo={{ if $photo }}{{ $photo.Name }}{{ else }}nil{{ end }} -->
   {{ if $photo }}
   {{ $medium := $photo.Process "resize 1200x webp q100" }}
   <div class="single-photo-wrap">
