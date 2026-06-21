@@ -1,6 +1,6 @@
 baseURL = "/"
 title = "Bellerophon Includia"
-languageCode = "en"
+locale = "en"
 enableRobotsTXT = true
 summaryLength = 50
 
