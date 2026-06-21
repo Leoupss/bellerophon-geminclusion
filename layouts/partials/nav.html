@@ -8,8 +8,6 @@
     </button>
     <ul class="nav-links" id="nav-menu" role="list">
       <li><a href="{{ "/inclusions/" | relURL }}" {{ if hasPrefix .RelPermalink "/inclusions" }}class="active"{{ end }}>{{ .Site.Params.includesLabel }}</a></li>
-      <li><a href="{{ "/glossaire/" | relURL }}" {{ if hasPrefix .RelPermalink "/glossaire" }}class="active"{{ end }}>{{ .Site.Params.glossaryLabel }}</a></li>
-      <li><a href="{{ "/a-propos/" | relURL }}" {{ if hasPrefix .RelPermalink "/a-propos" }}class="active"{{ end }}>{{ .Site.Params.aboutLabel }}</a></li>
     </ul>
   </div>
 </nav>

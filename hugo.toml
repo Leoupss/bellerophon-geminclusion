@@ -7,8 +7,6 @@ summaryLength = 50
 [params]
   subtitle = "The gemological inclusion reference database"
   includesLabel = "Inclusions"
-  glossaryLabel = "Glossary"
-  aboutLabel = "About"
   filterHost = "Host stone"
   filterOrigin = "Origin"
   filterTreatment = "Treatment"
@@ -22,7 +20,6 @@ summaryLength = 50
   treatmentLabel = "Treatment"
   depositLabel = "Deposit type"
   magnLabel = "Magnification"
-  diagLabel = "Diagnostic interest"
   backLabel = "← Back to inclusions"
   heroTagline = "Gemological photomicrography for gemstone identification"
   exploreCTA = "Explore the database"
